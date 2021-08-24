@@ -20,6 +20,6 @@ prepend_path("LD_LIBRARY_PATH","/usr/local/cuda-11.3/lib64")
 prepend_path("PATH",pathJoin(netcdf_root,"bin/"))
 prepend_path("CPATH",pathJoin(netcdf_root,"include/"))
 prepend_path("LD_LIBRARY_PATH",pathJoin(netcdf_root,"lib/"))
--- setenv("HYPRE_ROOT","/lus/theta-fs0/software/thetagpu/hypre/")
+setenv("NETCDF_ROOT",netcdf_root)
 
 family("netcdf")
