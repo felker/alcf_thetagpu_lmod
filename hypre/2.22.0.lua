@@ -9,7 +9,7 @@ whatis("Description: HYPRE is a library of high performance preconditioners and 
 whatis("URL: https://github.com/hypre-space/hypre")
 
 -- KGF: possibly need to rebuild hypre with openmpi-4.1.0_ucx-1.11.0_gcc-9.3.0 to be compatible with the HDF5 1.8.22, NetCDF modules built with that version of UCX and OpenMPI
--- depends_on("openmpi/openmpi-4.1.0_ucx-1.11.0_gcc-9.3.0")
+depends_on("openmpi/openmpi-4.1.0_ucx-1.11.0_gcc-9.3.0")
 -- KGF: was actually built with:
 -- depends_on("openmpi/openmpi-4.0.5")
 

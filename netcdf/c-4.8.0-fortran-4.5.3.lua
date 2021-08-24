@@ -11,7 +11,7 @@ whatis("Keywords: NetCDF")
 whatis("Description: NetCDF (Network Common Data Form) is a set of software libraries and machine-independent data formats that support the creation, access, and sharing of array-oriented scientific data.")
 whatis("URL: https://www.unidata.ucar.edu/software/netcdf/")
 
--- depends_on("openmpi/openmpi-4.1.0_ucx-1.11.0_gcc-9.3.0")
+depends_on("openmpi/openmpi-4.1.0_ucx-1.11.0_gcc-9.3.0")
 depends_on("hdf5/1.8.22")
 
 local netcdf_root = "/lus/theta-fs0/software/thetagpu/netcdf/"
