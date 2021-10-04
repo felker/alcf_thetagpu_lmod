@@ -1,0 +1,1 @@
+module_version("hdf5/1.12.0", "default")
