@@ -10,6 +10,6 @@ whatis("URL: https://github.com/hypre-space/hypre")
 
 depends_on("openmpi/openmpi-4.1.0_ucx-1.11.0_gcc-9.3.0")
 
-prepend_path("LD_LIBRARY_PATH","/usr/local/cuda-11.3/lib64")
+prepend_path("LD_LIBRARY_PATH","/usr/local/cuda-11.4/lib64")
 prepend_path("LD_LIBRARY_PATH","/lus/theta-fs0/software/thetagpu/hypre-cpu/src/hypre/lib")
 setenv("HYPRE_ROOT","/lus/theta-fs0/software/thetagpu/hypre-cpu/")
