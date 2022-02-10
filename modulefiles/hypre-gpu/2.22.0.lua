@@ -1,5 +1,5 @@
 help([[
-hypre 2.22.0+6631deb9
+hypre-gpu 2.22.0+6631deb9
 ./configure --with-cuda --with-gpu-arch='80' --with-cuda-home=/usr/local/cuda-11.3 --enable-gpu-profiling --enable-cusparse --enable-cublas --enable-curand --enable-device-memory-pool --enable-unified-memory --enable-shared  --enable-gpu-aware-mpi  
 ]])
 
@@ -14,6 +14,6 @@ depends_on("openmpi/openmpi-4.1.0_ucx-1.11.0_gcc-9.3.0")
 -- depends_on("openmpi/openmpi-4.0.5")
 
 prepend_path("LD_LIBRARY_PATH","/usr/local/cuda-11.3/lib64")
-prepend_path("LD_LIBRARY_PATH","/lus/theta-fs0/software/thetagpu/hypre/src/hypre/lib")
--- setenv("HYPRE_DIR","/lus/theta-fs0/software/thetagpu/hypre/src/hypre")
-setenv("HYPRE_ROOT","/lus/theta-fs0/software/thetagpu/hypre/")
+prepend_path("LD_LIBRARY_PATH","/lus/theta-fs0/software/thetagpu/hypre-gpu/src/hypre/lib")
+-- setenv("HYPRE_DIR","/lus/theta-fs0/software/thetagpu/hypre-gpu/src/hypre")
+setenv("HYPRE_ROOT","/lus/theta-fs0/software/thetagpu/hypre-gpu/")

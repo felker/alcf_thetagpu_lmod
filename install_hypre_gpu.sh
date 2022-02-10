@@ -1,8 +1,8 @@
 #!/bin/bash
 
 cd /lus/theta-fs0/software/thetagpu/
-git clone https://github.com/hypre-space/hypre.git
-cd hypre/src
+git clone https://github.com/hypre-space/hypre.git hypre-gpu
+cd hypre-gpu/src
 
 # git checkout v2.22.0
 make clean
