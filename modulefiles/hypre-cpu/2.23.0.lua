@@ -1,5 +1,5 @@
 help([[
-hypre-cpu 2.22.0+6631deb9
+hypre-cpu 2.23.0+ccd135d8d
 ./configure --enable-shared
 ]])
 
