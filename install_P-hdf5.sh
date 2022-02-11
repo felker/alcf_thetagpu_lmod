@@ -1,13 +1,21 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash -l
 
 set -e
 module purge
 #  module unload openmpi/openmpi-4.0.5
 # 4.0.5 should probably be the default build due to it's preference by the nvhpc folks
-module use /lus/theta-fs0/software/environment/thetagpu/lmod/tmp
+#module use /lus/theta-fs0/software/environment/thetagpu/lmod/tmp
+
+#module load nvhpc-mpi/21.7
+# -nompi = excludes NVHPC MPI libraries. Preferred module;
+# important to use ALCF provided OpenMPI modules for multi-node runs
+module load nvhpc-nompi/21.7
+module load openmpi/openmpi-4.0.5_ucx-1.10.0_nvhpc-21.7
+
 # KGF: Other UCX installs on ThetaGPU lead to UCX errors during ph5diff tests (and non-fatally can be generated during below UCX ./io_demo)
 #  1629755187.401889] [thetagpu19:4178252:0]    ucp_context.c:1114 UCX  ERROR exceeded transports/devices limit (72 requested, up to 64 are supported)
-module load openmpi-4.1.0_ucx-1.11.0_gcc-9.3.0
+#module load openmpi/openmpi-4.1.0_ucx-1.11.0_gcc-9.3.0
+#module load openmpi/openmpi-4.1.1_ucx-1.11.2_gcc-9.3.0
 # https://github.com/openucx/ucx/issues/4842
 # https://github.com/openucx/ucx/pull/4905/commits/f0b3901d3c3ca1b2e389bf15c4357986d80cc90e
 # UCT_SOCKCM_PRIV_DATA_LEN extended to 2048 in March 2020, 1.9.0 and later
@@ -45,11 +53,14 @@ module load openmpi-4.1.0_ucx-1.11.0_gcc-9.3.0
 # --------------------------------------------------------------------------
 
 cd $HOME
-git clone https://github.com/HDFGroup/hdf5.git
+git clone https://github.com/HDFGroup/hdf5.git || true
 cd hdf5
 git checkout hdf5-1_8_22
-make clean
-CC=/lus/theta-fs0/software/thetagpu/openmpi/openmpi-4.1.0_ucx-1.11.0_gcc-9.3.0/bin/mpicc RUNPARALLEL='/lus/theta-fs0/software/thetagpu/openmpi/openmpi-4.1.0_ucx-1.11.0_gcc-9.3.0/bin/mpiexec -n $${NPROCS:=6}' RUNSERIAL='/lus/theta-fs0/software/thetagpu/openmpi/openmpi-4.1.0_ucx-1.11.0_gcc-9.3.0/bin/mpiexec -n 1' ./configure --enable-parallel --prefix=/lus/theta-fs0/software/thetagpu/hdf5/1.8.22/
+make clean || true
+#CC=/lus/theta-fs0/software/thetagpu/openmpi/openmpi-4.1.0_ucx-1.11.0_gcc-9.3.0/bin/mpicc RUNPARALLEL='/lus/theta-fs0/software/thetagpu/openmpi/openmpi-4.1.0_ucx-1.11.0_gcc-9.3.0/bin/mpiexec -n $${NPROCS:=6}' RUNSERIAL='/lus/theta-fs0/software/thetagpu/openmpi/openmpi-4.1.0_ucx-1.11.0_gcc-9.3.0/bin/mpiexec -n 1'
+
+CC=/lus/theta-fs0/software/thetagpu/openmpi/openmpi-4.0.5_ucx-1.10.0_hpc_sdk-21.7/bin/mpicc RUNPARALLEL='/lus/theta-fs0/software/thetagpu/openmpi/openmpi-4.0.5_ucx-1.10.0_hpc_sdk-21.7/bin/mpiexec -n $${NPROCS:=6}' RUNSERIAL='/lus/theta-fs0/software/thetagpu/openmpi/openmpi-4.0.5_ucx-1.10.0_hpc_sdk-21.7/bin/mpiexec -n 1' ./configure --enable-parallel --prefix=/lus/theta-fs0/software/thetagpu/hdf5/1.8.22-nvhpc/
+# CC=/soft/hpc-sdk/Linux_x86_64/21.7/comm_libs/mpi/bin/mpicc RUNPARALLEL='/soft/hpc-sdk/Linux_x86_64/21.7/comm_libs/mpi/bin/mpiexec -n $${NPROCS:=6}' RUNSERIAL='/soft/hpc-sdk/Linux_x86_64/21.7/comm_libs/mpi/bin/mpiexec -n 1' ./configure --enable-parallel --prefix=/lus/theta-fs0/software/thetagpu/hdf5/1.8.22-nvhpc/
 # changing affinity in mpirun above with "--map-by node --bind-to numa" didnt circumvent the issues with the old modules
 make -j128
 
