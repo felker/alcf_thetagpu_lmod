@@ -7,6 +7,10 @@ module load openmpi/openmpi-4.1.4_ucx-1.12.1_nvhpc-21.7
 
 
 cd $HOME
+# KGF: best to rm -rfd the whole directory after failed builds. Had trouble building 1.12.2 when reusing earlier 1.8.x build directory:
+# Making all in test
+# make[1]: Entering directory '/home/felker/hdf5/test'
+# make[1]: *** No rule to make target '../src/H5HGpublic.h', needed by 'gheap.o'.  Stop.
 git clone https://github.com/HDFGroup/hdf5.git || true
 cd hdf5
 git checkout hdf5-1_12_2
