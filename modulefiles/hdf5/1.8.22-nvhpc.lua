@@ -1,5 +1,6 @@
 help([[
-Parallel HDF5 library version 1.8.22, built with OpenMPI (built with NVIDIA HPC compilers)
+Parallel HDF5 library version 1.8.22, built with OpenMPI (wrapping NVIDIA HPC compilers)
+No Fortran support
 ]])
 
 whatis("Name: HDF5")
